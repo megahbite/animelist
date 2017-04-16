@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  anime: one
+  status: 1
+  watched: 1
+  score: 1
+
+two:
+  user: two
+  anime: two
+  status: 1
+  watched: 1
+  score: 1

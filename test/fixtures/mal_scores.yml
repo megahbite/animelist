@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  anime: one
+  score: 1.5
+  rank: 1
+  week: 1
+
+two:
+  anime: two
+  score: 1.5
+  rank: 1
+  week: 1

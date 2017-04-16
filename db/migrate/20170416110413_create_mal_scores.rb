@@ -7,6 +7,7 @@ class CreateMalScores < ActiveRecord::Migration[5.0]
       t.integer :week
 
       t.timestamps
+      t.index [:anime_id, :week]
     end
   end
 end

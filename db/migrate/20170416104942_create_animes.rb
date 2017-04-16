@@ -4,7 +4,7 @@ class CreateAnimes < ActiveRecord::Migration[5.0]
       t.string :title
       t.text :image_url
       t.integer :episode_count
-      t.integer :mal_id
+      t.integer :mal_id, index: true
       t.text :synonyms
 
       t.timestamps

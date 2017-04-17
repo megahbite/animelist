@@ -8,8 +8,8 @@ class ProcessMalProfiles
   def self.add_or_update_scores(user, scores)
     scores.each do |anime_node|
       mal_id = anime_node.at_xpath("series_animedb_id").content.to_i
-      anime = Anime.where(mal_id: mal_id) || create_anime(mal_id, anime_node)
-      score = UserScore.find_or_initialize(user: user, anime: anime)
+      anime = Anime.find_by(mal_id: mal_id) || create_anime(mal_id, anime_node)
+      score = UserScore.find_or_initialize_by(user: user, anime: anime)
 
       score.status = anime_node.at_xpath("my_status").content.to_i
       score.watched = anime_node.at_xpath("my_watched_episodes").content.to_i

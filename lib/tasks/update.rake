@@ -15,9 +15,9 @@ namespace :update do
   desc "Pulls the anime scores from the users' MAL profiles"
   task user_scores: :environment do
     conn = Faraday.new(url: "https://myanimelist.net")
-    User.each do |user|
+    User.all.each do |user|
       anime_scores = ProcessMalProfiles.get_user_scores(conn, user.mal_name)
-      puts "Adding scores from #{user.reddit_usename} for #{anime_scores.count} anime"
+      puts "Adding scores from #{user.reddit_name} for #{anime_scores.count} anime"
       ProcessMalProfiles.add_or_update_scores(user, anime_scores)
     end
   end

@@ -21,4 +21,22 @@ namespace :update do
       ProcessMalProfiles.add_or_update_scores(user, anime_scores)
     end
   end
+
+  desc "Calculates the score from users for the week"
+  task calculate_scores: :environment do
+    Anime.all.each do |anime|
+      scores = UserScore.where(anime: anime)
+                        .where.not(status: 6)
+                        .where.not(score: 0)
+                        .where.not(watched: 0)
+      sum = scores.sum(:score)
+      count = scores.count()
+      avg = scores.average(:score)
+      scoreChanger = 2
+      mean = 6.55
+      score = (count / (count + scoreChanger)) * avg + (scoreChanger / (count + scoreChanger)) * mean
+      RedditScore.create(anime: anime, score: score)
+      puts "Calculated the score for #{anime.title} as #{score}."
+    end
+  end
 end

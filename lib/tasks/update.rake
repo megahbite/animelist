@@ -29,10 +29,11 @@ namespace :update do
                         .where.not(status: 6)
                         .where.not(score: 0)
                         .where.not(watched: 0)
-      sum = scores.sum(:score)
-      count = scores.count()
-      avg = scores.average(:score)
-      scoreChanger = 2
+      next if scores.empty?
+      sum = scores.sum(:score).to_f
+      count = scores.count().to_f
+      avg = scores.average(:score).to_f
+      scoreChanger = 2.0
       mean = 6.55
       score = (count / (count + scoreChanger)) * avg + (scoreChanger / (count + scoreChanger)) * mean
       RedditScore.create(anime: anime, score: score)

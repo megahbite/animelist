@@ -1,6 +1,6 @@
 class ProcessRedditUsers
   def self.fetch_user_flairs(subreddit)
-    new_posts_json = Faraday.get "https://www.reddit.com/r/#{subreddit}/new.json"
+    new_posts_json = Faraday.get "https://www.reddit.com/r/#{subreddit}/new.json?limit=100"
     new_posts = JSON.parse new_posts_json.body
     post_ids = new_posts["data"]["children"].map { |child| child["data"]["id"] }
     users = {}
@@ -14,6 +14,7 @@ class ProcessRedditUsers
   def self.extract_mal_profiles(user_flairs)
     users = {}
     user_flairs.each do |reddit_username, flair|
+      next unless flair
       flair.match %r{myanimelist\.net/(profile|animelist)/(?<profile>\w+)} do |match|
         users[reddit_username] = match.named_captures["profile"] if match
       end
@@ -33,8 +34,6 @@ class ProcessRedditUsers
     comments.each do |comment|
       flatten_authors(authors_hash, comment)
     end
-
-    authors
   end
 
   def self.flatten_authors(authors_hash, comment)

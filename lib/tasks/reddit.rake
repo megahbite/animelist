@@ -4,6 +4,7 @@ namespace :reddit do
 
     users = ProcessRedditUsers.extract_mal_profiles(user_flairs)
     users.each do |reddit_username, mal_profile|
+      logger.info "Creating/updating reddit user #{reddit_username} with MAL profile #{mal_profile}"
       user = User.find_or_initialize_by(reddit_name: reddit_username)
       user.mal_name = mal_profile
       user.save

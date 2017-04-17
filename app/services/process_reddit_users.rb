@@ -15,7 +15,7 @@ class ProcessRedditUsers
     users = {}
     user_flairs.each do |reddit_username, flair|
       flair.match %r{myanimelist\.net/(profile|animelist)/(?<profile>\w+)} do |match|
-        users[reddit_username] = match.named_captures["profile"]
+        users[reddit_username] = match.named_captures["profile"] if match
       end
     end
     users

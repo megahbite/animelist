@@ -29,7 +29,7 @@ namespace :update do
                         .where.not(status: 6)
                         .where.not(score: 0)
                         .where.not(watched: 0)
-      RedditScore.create(anime: anime, score: 0) if scores.empty?
+      RedditScore.create(anime: anime, score: 0) && next if scores.empty?
       sum = scores.sum(:score).to_f
       count = scores.count().to_f
       avg = sum / count
@@ -47,6 +47,6 @@ namespace :update do
     ProcessMalScores.extract_scores(conn)
   end
 
-  # desc "Run all the tasks for updating the database"
-  # task all: [:users, :user_scores, :calculate_scores, :mal_scores]
+  desc "Run all the tasks for updating the database"
+  task all: [:users, :user_scores, :calculate_scores, :mal_scores]
 end

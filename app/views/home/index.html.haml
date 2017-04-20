@@ -10,7 +10,7 @@
   %p
     Average score of 
     = Rails.configuration.app_config["subreddit"]
-    %span= RedditScore.average(:score)
+    %span= RedditScore.where.not(status: 6, score: 0, watched: 0).average(:score)
   %p
     Average score of MAL:
     %span= MalScore.average(:score)

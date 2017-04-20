@@ -1,4 +1,4 @@
-default:
+default: &default
   subreddit: "xxanime"
   scoring:
     mean: 6.55 # A mean to weight the scores towards

@@ -29,15 +29,21 @@ namespace :update do
                         .where.not(status: 6)
                         .where.not(score: 0)
                         .where.not(watched: 0)
-      next if scores.empty?
+      RedditScore.create(anime: anime, score: 0) if scores.empty?
       sum = scores.sum(:score).to_f
       count = scores.count().to_f
       avg = sum / count
-      score_changer = Rails.configuration.app_config["scoring"]["score_changer"]
+      minimum = Rails.configuration.app_config["scoring"]["minimum"]
       mean = Rails.configuration.app_config["scoring"]["mean"]
-      score = (count / (count + score_changer)) * avg + (score_changer / (count + score_changer)) * mean
+      score = (count / (count + minimum)) * avg + (minimum / (count + minimum)) * mean
       RedditScore.create(anime: anime, score: score)
       puts "Calculated the score for #{anime.title} as #{score}."
     end
+  end
+
+  desc "Pulls the community scores from MAL"
+  task mal_scores: :environment do
+    conn = Faraday.new(url: "https://myanimelist.net")
+    ProcessMalScores.extract_scores(conn)
   end
 end

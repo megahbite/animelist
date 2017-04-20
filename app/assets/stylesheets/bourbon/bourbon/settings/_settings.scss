@@ -72,4 +72,6 @@ $_bourbon-defaults: (
 ///     "rails-asset-pipeline": false,
 ///   );
 
-$bourbon: () !default;
+$bourbon: (
+  "rails-asset-pipeline": true
+) !default;

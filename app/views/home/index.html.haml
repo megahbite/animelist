@@ -2,4 +2,15 @@
   = Rails.configuration.app_config["subreddit"] 
   Reddit Anime List v2.0
 
-  
+%div.stats
+  %h3 General Info:
+  %p 
+    Number of Reddit Users:
+    %span= Users.count
+  %p
+    Average score of 
+    = Rails.configuration.app_config["subreddit"]
+    %span= RedditScore.average(:score)
+  %p
+    Average score of MAL:
+    %span= MalScore.average(:score)

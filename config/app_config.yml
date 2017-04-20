@@ -1,0 +1,14 @@
+default:
+  subreddit: "xxanime"
+  scoring:
+    mean: 6.55 # A mean to weight the scores towards
+    score_changer: 2.0 # The amount of "effort" it takes to change a score away from the mean.
+
+development:
+  <<: *default
+
+test:
+  <<: *default
+
+production:
+  <<: *default

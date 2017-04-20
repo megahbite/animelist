@@ -1,7 +1,7 @@
 namespace :update do
   desc "Pulls latest reddit posts on xxanime and extracts MAL profiles from flair of commentors"
   task users: :environment do
-    user_flairs = ProcessRedditUsers.fetch_user_flairs("xxanime") 
+    user_flairs = ProcessRedditUsers.fetch_user_flairs(Rails.configuration.app_config["subreddit"]) 
 
     users = ProcessRedditUsers.extract_mal_profiles(user_flairs)
     users.each do |reddit_username, mal_profile|
@@ -32,10 +32,10 @@ namespace :update do
       next if scores.empty?
       sum = scores.sum(:score).to_f
       count = scores.count().to_f
-      avg = scores.average(:score).to_f
-      scoreChanger = 2.0
-      mean = 6.55
-      score = (count / (count + scoreChanger)) * avg + (scoreChanger / (count + scoreChanger)) * mean
+      avg = sum / count
+      score_changer = Rails.configuration.app_config["scoring"]["score_changer"]
+      mean = Rails.configuration.app_config["scoring"]["mean"]
+      score = (count / (count + score_changer)) * avg + (score_changer / (count + score_changer)) * mean
       RedditScore.create(anime: anime, score: score)
       puts "Calculated the score for #{anime.title} as #{score}."
     end

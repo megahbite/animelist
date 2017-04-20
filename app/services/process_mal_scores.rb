@@ -28,7 +28,7 @@ class ProcessMalScores
 
     rank = rank_node.at_xpath(".//td[contains(@class, 'rank')]/span").content
     detail_node = rank_node.at_xpath(".//td[contains(@class, 'title')]//div[@class='detail']")
-    mal_id = detail_node.at_xpath(".//div[starts-with(@id, 'info')]")["id"].sub("info")
+    mal_id = detail_node.at_xpath(".//div[starts-with(@id, 'info')]")["id"].sub("info", "")
     score = rank_node.at_xpath(".//td[starts-with(@class, 'score')]//span").content.to_f
 
     [score, mal_id, rank]

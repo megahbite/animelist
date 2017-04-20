@@ -46,4 +46,7 @@ namespace :update do
     conn = Faraday.new(url: "https://myanimelist.net")
     ProcessMalScores.extract_scores(conn)
   end
+
+  # desc "Run all the tasks for updating the database"
+  # task all: [:users, :user_scores, :calculate_scores, :mal_scores]
 end

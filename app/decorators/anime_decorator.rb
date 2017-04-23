@@ -22,6 +22,6 @@ class AnimeDecorator < Draper::Decorator
   end
 
   def rank_difference
-    (object.latest_rank - object.latest_mal_rank)
+    (object.latest_mal_rank - object.latest_rank)
   end
 end

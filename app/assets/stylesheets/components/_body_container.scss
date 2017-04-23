@@ -5,13 +5,13 @@
     @include grid-column(12);
 
     @media screen and (min-width: $medium-screen) {
-      @include grid-column(4);
-      @include grid-shift(4);
+      @include grid-column(10);
+      @include grid-shift(1);
     }
 
     @media screen and (min-width: $large-screen) {
-      @include grid-column(6);
-      @include grid-shift(3);
+      @include grid-column(8);
+      @include grid-shift(2);
     }
   }
 }

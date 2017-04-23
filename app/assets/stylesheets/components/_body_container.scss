@@ -1,0 +1,7 @@
+.body-container {
+  @include grid-container;
+
+  .main-body {
+    @include grid-column(6);
+  }
+}

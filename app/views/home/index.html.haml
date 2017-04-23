@@ -4,7 +4,9 @@
 
 = render partial: "stats", locals: { front_page: @front_page }
 
-%div.animelist
+.pagination_controls= paginate @front_page
+
+.animelist
 
   %table
     - @front_page.each do |anime|
@@ -17,5 +19,4 @@
         %td= anime.score_difference
         %td= anime.mal_score
 
-%div.pagination_controls
-  %div= paginate @front_page
+.pagination_controls= paginate @front_page

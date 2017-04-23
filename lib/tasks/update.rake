@@ -39,6 +39,13 @@ namespace :update do
       RedditScore.create(anime: anime, score: score)
       puts "Calculated the score for #{anime.title} as #{score}."
     end
+
+    rank = 1
+    RedditScore.order(score: :asc).each do |score|
+      score.rank = rank
+      score.save
+      rank += 1
+    end
   end
 
   desc "Pulls the community scores from MAL"

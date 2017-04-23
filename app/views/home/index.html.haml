@@ -20,8 +20,11 @@
       %tr
         %td.rank= anime.rank
         %td
-          %img.thumbnail{src: anime.image_url, alt: anime.title}
-        %td= anime.title
+          = link_to anime do
+            %img.thumbnail{src: anime.image_url, alt: anime.title}
+        %td
+          = link_to anime do
+            = anime.title
         %td= anime.score
         %td= "#{anime.score_difference} (#{anime.rank_difference})"
         %td= "#{anime.mal_score} (##{anime.mal_rank})"

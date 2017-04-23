@@ -1,5 +1,5 @@
 class AnimeDecorator < Draper::Decorator
-  delegate :title, :image_url
+  delegate :title, :image_url, :to_param
 
   def rank
     object.latest_rank
@@ -23,5 +23,13 @@ class AnimeDecorator < Draper::Decorator
 
   def rank_difference
     (object.latest_mal_rank - object.latest_rank)
+  end
+
+  def seen_by
+    UserScore.where.not(status: 6).where(anime: object).count
+  end
+
+  def number_of_votes
+    UserScore.where.not(status: 6, score: 0).where(anime: object).count
   end
 end

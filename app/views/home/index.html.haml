@@ -1,7 +1,3 @@
-%h1
-  = Rails.configuration.app_config["subreddit"] 
-  Reddit Anime List v2.0
-
 = render partial: "stats", locals: { front_page: @front_page }
 
 .pagination_controls= paginate @front_page
@@ -20,10 +16,10 @@
       %tr
         %td.rank= anime.rank
         %td
-          = link_to anime.object do
-            %img.thumbnail{src: anime.image_url, alt: anime.title}
+          = link_to anime_path(anime) do
+            %img.thumbnail{src: anime.image_url, title: anime.title}
         %td
-          = link_to anime.object do
+          = link_to anime_path(anime) do
             = anime.title
         %td= anime.score
         %td= "#{anime.score_difference} (#{anime.rank_difference})"

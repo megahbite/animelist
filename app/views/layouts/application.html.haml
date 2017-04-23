@@ -9,4 +9,7 @@
   %body
     .body-container
       .main-body
+        %h1
+          = Rails.configuration.app_config["subreddit"] 
+          Reddit Anime List v2.0
         = yield

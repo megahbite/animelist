@@ -1,0 +1,24 @@
+.anime
+  %h2= anime.title
+
+  .poster
+    %img{src: anime.image_url, title: anime.title}
+
+  .stats
+    %ul
+      %li
+        = anime.mal_score
+        %span MAL Score
+      %li
+        = anime.score
+        %span Score
+      %li
+        = anime.score_difference
+        %span Difference
+      %li
+        = anime.seen_by
+        %span Seen by
+      %li
+        = anime.number_of_votes
+        %span Number of votes
+  

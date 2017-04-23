@@ -4,12 +4,12 @@
   .main-body {
     @include grid-column(12);
 
-    @include media($medium-screen) {
+    @media screen and (min-width: $medium-screen) {
       @include grid-column(4);
       @include grid-shift(4);
     }
 
-    @include media($large-screen) {
+    @media screen and (min-width: $large-screen) {
       @include grid-column(6);
       @include grid-shift(3);
     }

@@ -7,4 +7,8 @@
   .thumbnail {
     width: 81px;
   }
+
+  td, th {
+    padding: $small-spacing;
+  }
 }

@@ -20,4 +20,8 @@ class AnimeDecorator < Draper::Decorator
   def score_difference
     (object.latest_score - object.latest_mal_score).round(2)
   end
+
+  def rank_difference
+    (object.latest_rank - object.latest_mal_rank)
+  end
 end

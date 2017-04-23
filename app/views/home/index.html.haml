@@ -9,6 +9,13 @@
 .anime_list
 
   %table
+    %tr
+      %th #
+      %th
+      %th Title
+      %th Score
+      %th Difference
+      %th MAL Score
     - @front_page.each do |anime|
       %tr
         %td.rank= anime.rank
@@ -16,7 +23,7 @@
           %img.thumbnail{src: anime.image_url, alt: anime.title}
         %td= anime.title
         %td= anime.score
-        %td= anime.score_difference
-        %td= anime.mal_score
+        %td= "#{anime.score_difference} (#{anime.rank_difference})"
+        %td= "#{anime.mal_score} (##{anime.mal_rank})"
 
 .pagination_controls= paginate @front_page

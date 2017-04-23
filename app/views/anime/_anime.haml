@@ -20,5 +20,25 @@
         %span Seen by
       %li
         = anime.number_of_votes
-        %span Number of votes
+        %span Number of scores
+
+    .user_scores
+      %table
+        %tr
+          %th Reddit Profile
+          %th MAL Profile
+          %th Score
+          %th Status
+          %th Episodes Seen
+        - scores.each do |score|
+          %tr
+            %td
+              %a{href: "https://www.reddit.com/user/#{score.reddit_name}"}
+                = score.reddit_name
+            %td
+              %a{href: "https://myanimelist.net/profile/#{score.mal_name}"}
+                = score.mal_name
+            %td= score.score
+            %td= score.status
+            %td= score.watched
   

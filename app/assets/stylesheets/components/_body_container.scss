@@ -2,7 +2,16 @@
   @include grid-container;
 
   .main-body {
-    @include grid-column(6);
-    @include grid-shift(3);
+    @include grid-column(12);
+
+    @include media($medium-screen) {
+      @include grid-column(4);
+      @include grid-shift(4);
+    }
+
+    @include media($large-screen) {
+      @include grid-column(6);
+      @include grid-shift(3);
+    }
   }
 }

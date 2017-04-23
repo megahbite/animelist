@@ -1,0 +1,11 @@
+%div.stats
+  %h3 General Info:
+  %p 
+    Number of Reddit Users:
+    %span= front_page.number_of_users
+  %p
+    = "Average score of #{front_page.current_subreddit}:"
+    %span= front_page.reddit_average
+  %p
+    Average score of MAL:
+    %span= front_page.mal_average

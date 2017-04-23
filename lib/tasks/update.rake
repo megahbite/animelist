@@ -41,7 +41,8 @@ namespace :update do
     end
 
     rank = 1
-    RedditScore.order(score: :desc).each do |score|
+    # New scores will be the only ones without a rank so we can safely assume we won't rank the old scores.
+    RedditScore.where(rank: nil).order(score: :desc).each do |score| 
       score.rank = rank
       score.save
       rank += 1

@@ -2,15 +2,15 @@
   = Rails.configuration.app_config["subreddit"] 
   Reddit Anime List v2.0
 
-%div.stats
-  %h3 General Info:
-  %p 
-    Number of Reddit Users:
-    %span= User.count
-  %p
-    Average score of 
-    = Rails.configuration.app_config["subreddit"]
-    %span= RedditScore.where.not(score: 0).average(:score).round(2)
-  %p
-    Average score of MAL:
-    %span= MalScore.average(:score).round(2)
+= render "stats", locals: { front_page: @front_page }
+
+%div.animelist
+
+  %table
+    - @front_page.each do |anime|
+      %tr
+        %td= anime.rank
+        %td
+          %img{src: anime.image_url, alt: anime.title}
+        %td= anime.title
+        %td= anime.score

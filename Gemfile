@@ -21,12 +21,14 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'faraday'
 
-gem 'haml-rails'
+gem 'hamlit-rails'
 gem 'pg'
 
 gem 'kaminari'
 
 gem 'pry-rails'
+
+gem 'draper', '~> 3.0.0.pre1'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

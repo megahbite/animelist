@@ -3,5 +3,6 @@
 
   .main-body {
     @include grid-column(6);
+    @include grid-shift(3);
   }
 }

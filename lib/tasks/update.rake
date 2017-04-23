@@ -28,7 +28,7 @@ namespace :update do
       scores = UserScore.where(anime: anime)
                         .where.not(status: 6)
                         .where.not(score: 0)
-                        .where.not(watched: 0)
+                        .where("watched > ?", (anime.episode_count.to_f * 0.2).floor)
       RedditScore.create(anime: anime, score: 0) && next if scores.empty?
       sum = scores.sum(:score).to_f
       count = scores.count().to_f

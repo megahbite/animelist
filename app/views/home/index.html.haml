@@ -14,3 +14,8 @@
           %img{src: anime.image_url, alt: anime.title}
         %td= anime.title
         %td= anime.score
+        %td= anime.score_difference
+        %td= anime.mal_score
+
+%div.pagination_controls
+  %div= paginate @front_page

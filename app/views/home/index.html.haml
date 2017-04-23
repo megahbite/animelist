@@ -2,7 +2,7 @@
   = Rails.configuration.app_config["subreddit"] 
   Reddit Anime List v2.0
 
-= render "stats", locals: { front_page: @front_page }
+= render partial: "stats", locals: { front_page: @front_page }
 
 %div.animelist
 

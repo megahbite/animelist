@@ -1,6 +1,7 @@
 .pagination_controls {
   clear: left;
-  padding: 1em 0;
+  padding: 2em 0 0 0;
+  margin-bottom: 1em;
 
   $pagination-border-color: $base-border-color;
   $pagination-border: 1px solid $pagination-border-color;

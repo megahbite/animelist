@@ -25,28 +25,10 @@ namespace :update do
   desc "Calculates the score from users for the week"
   task calculate_scores: :environment do
     Anime.all.each do |anime|
-      scores = UserScore.where(anime: anime)
-                        .where.not(status: 6)
-                        .where.not(score: 0)
-                        .where("watched > ?", (anime.episode_count.to_f * 0.2).floor)
-      RedditScore.create(anime: anime, score: 0) && next if scores.empty?
-      sum = scores.sum(:score).to_f
-      count = scores.count().to_f
-      avg = sum / count
-      minimum = Rails.configuration.app_config["scoring"]["minimum"]
-      mean = Rails.configuration.app_config["scoring"]["mean"]
-      score = (count / (count + minimum)) * avg + (minimum / (count + minimum)) * mean
-      RedditScore.create(anime: anime, score: score)
-      puts "Calculated the score for #{anime.title} as #{score}."
+      CalculateRedditScores.calculate_anime_score(anime)
     end
 
-    rank = 1
-    # New scores will be the only ones without a rank so we can safely assume we won't rank the old scores.
-    RedditScore.where(rank: nil).order(score: :desc).each do |score| 
-      score.rank = rank
-      score.save
-      rank += 1
-    end
+    CalculateRedditScores.calculate_anime_ranks
   end
 
   desc "Pulls the community scores from MAL"

@@ -8,6 +8,10 @@
     width: 81px;
   }
 
+  table {
+    table-layout: auto;
+  }
+
   td, th {
     padding: $small-spacing;
   }

@@ -6,14 +6,14 @@
 
 .pagination_controls= paginate @front_page
 
-.animelist
+.anime_list
 
   %table
     - @front_page.each do |anime|
       %tr
-        %td= anime.rank
+        %td.rank= anime.rank
         %td
-          %img{src: anime.image_url, alt: anime.title}
+          %img.thumbnail{src: anime.image_url, alt: anime.title}
         %td= anime.title
         %td= anime.score
         %td= anime.score_difference

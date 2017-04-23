@@ -41,7 +41,7 @@ namespace :update do
     end
 
     rank = 1
-    RedditScore.order(score: :asc).each do |score|
+    RedditScore.order(score: :desc).each do |score|
       score.rank = rank
       score.save
       rank += 1

@@ -1,5 +1,5 @@
 .anime
-  %h2= anime.title
+  %h2.title= anime.title
 
   .poster
     %img{src: anime.image_url, title: anime.title}
@@ -25,7 +25,7 @@
         %li
           = anime.score_difference
           %span Difference
-          
+
     .stats
       %ul
         %li

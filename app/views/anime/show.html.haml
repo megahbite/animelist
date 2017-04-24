@@ -1,1 +1,2 @@
-= render partial: "anime", locals: { anime: anime, scores: @user_scores } 
+- cache anime do
+  = render partial: "anime", locals: { anime: anime, scores: @user_scores } 

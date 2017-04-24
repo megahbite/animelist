@@ -14,20 +14,21 @@
       %th MAL Score
       %th Difference
     - @front_page.each do |anime|
-      %tr
-        %td.rank= anime.rank
-        %td
-          = link_to anime_path(anime) do
-            %img.thumbnail{src: anime.image_url, title: anime.title}
-        %td
-          = link_to anime_path(anime) do
-            = anime.title
-        %td= anime.score
-        %td= anime.mal_rank
-        %td= anime.mal_score
-        %td
-          = anime.rank_difference
-          %br
-          = "(#{anime.score_difference})"
+      - cache ["anime-rank", anime] do
+        %tr
+          %td.rank= anime.rank
+          %td
+            = link_to anime_path(anime) do
+              %img.thumbnail{src: anime.image_url, title: anime.title}
+          %td
+            = link_to anime_path(anime) do
+              = anime.title
+          %td= anime.score
+          %td= anime.mal_rank
+          %td= anime.mal_score
+          %td
+            = anime.rank_difference
+            %br
+            = "(#{anime.score_difference})"
 
 .pagination_controls= paginate @front_page

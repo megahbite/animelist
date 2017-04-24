@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class AnimeDecorator < Draper::Decorator
-  delegate :title, :image_url, :to_param
+  delegate :title, :image_url, :to_param, :cache_key
 
   def rank
     object.latest_rank

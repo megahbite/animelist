@@ -2,6 +2,8 @@
   %h2.title
     %a{href: "https://myanimelist.net/anime/#{anime.mal_id}"}
       = anime.title
+  %h3.subtitle
+    = anime.synonyms
 
   .poster
     %img{src: anime.image_url, title: anime.title}
@@ -35,7 +37,10 @@
           %span Seen by
         %li
           = anime.number_of_votes
-          %span Number of scores
+          %span No. of scores
+        %li
+          = anime.episode_count
+          %span Total episodes
 
   .user_scores.alternating_table
     %table

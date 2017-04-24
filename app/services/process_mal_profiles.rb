@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ProcessMalProfiles
   def self.get_user_scores(conn, mal_profile)
     profile_data = conn.get "/malappinfo.php", u: mal_profile, status: "all", type: "anime"

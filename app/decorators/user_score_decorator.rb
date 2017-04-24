@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UserScoreDecorator < Draper::Decorator
   delegate :watched
 
@@ -10,7 +12,7 @@ class UserScoreDecorator < Draper::Decorator
   end
 
   def score
-    object.score > 0 ? object.score : ""
+    object.score.positive? ? object.score : ""
   end
 
   def status

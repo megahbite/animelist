@@ -6,21 +6,5 @@
 
   .thumbnail {
     width: 81px;
-  }
-
-  table {
-    table-layout: auto;
-  }
-
-  td, th {
-    padding: $small-spacing;
-  }
-
-  tr:nth-child(2n) {
-    background-color: $secondary-background-color;
-  }
-
-  tr:hover {
-    background-color: darken($secondary-background-color, 10%);
-  }
+  }  
 }

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ProcessRedditUsers
   def self.fetch_user_flairs(subreddit)
     new_posts_json = Faraday.get "https://www.reddit.com/r/#{subreddit}/new.json?limit=100"
@@ -22,8 +24,6 @@ class ProcessRedditUsers
     users
   end
 
-  private
-
   def self.comment_authors(subreddit, post_id, authors_hash)
     comments_json = Faraday.get "https://www.reddit.com/r/#{subreddit}/comments/#{post_id}.json"
     comments = JSON.parse comments_json.body
@@ -37,7 +37,9 @@ class ProcessRedditUsers
   end
 
   def self.flatten_authors(authors_hash, comment)
-    authors_hash[comment["data"]["author"]] = comment["data"]["author_flair_text"]
+    comment_data = comment["data"]
+    author = comment_data["author"]
+    authors_hash[author] = comment_data["author_flair_text"] unless authors_hash.key? author
     return unless comment["replies"].is_a? Hash
     comment["replies"]["data"]["children"].each do |child_comment|
       flatten_authors(authors_hash, child_comment)

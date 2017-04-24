@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateMalScores < ActiveRecord::Migration[5.0]
   def change
     create_table :mal_scores do |t|
@@ -7,7 +9,7 @@ class CreateMalScores < ActiveRecord::Migration[5.0]
       t.integer :week
 
       t.timestamps
-      t.index [:anime_id, :week]
+      t.index %i[anime_id week]
     end
   end
 end

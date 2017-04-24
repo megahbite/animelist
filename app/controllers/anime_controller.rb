@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AnimeController < ApplicationController
   decorates_assigned :anime
   def show

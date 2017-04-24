@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AnimeDecorator < Draper::Decorator
   delegate :title, :image_url, :to_param
 
@@ -6,11 +8,11 @@ class AnimeDecorator < Draper::Decorator
   end
 
   def score
-    object.latest_score.round(2)
+    object.latest_score.positive? ? format("%.2f", object.latest_score.round(2)) : "-"
   end
 
   def mal_score
-    object.latest_mal_score
+    object.latest_mal_score ? format("%.2f", object.latest_mal_score) : "-"
   end
 
   def mal_rank
@@ -18,11 +20,13 @@ class AnimeDecorator < Draper::Decorator
   end
 
   def score_difference
-    (object.latest_score - object.latest_mal_score).round(2)
+    diff = (object.latest_score - (object.latest_mal_score || 0.0)).round(2)
+    format("%+.2f", diff)
   end
 
   def rank_difference
-    (object.latest_mal_rank - object.latest_rank)
+    diff = ((object.latest_mal_rank || 0) - object.latest_rank)
+    format("%+d", diff)
   end
 
   def seen_by

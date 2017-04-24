@@ -1,0 +1,15 @@
+AllCops:
+  Exclude:
+    - 'db/schema.rb'
+
+Style/Documentation:
+  Enabled: false
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+
+Metrics/LineLength:
+  Max: 120
+
+Rails:
+  Enabled: true

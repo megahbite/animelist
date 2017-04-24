@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 namespace :update do
   desc "Pulls latest reddit posts on xxanime and extracts MAL profiles from flair of commentors"
   task users: :environment do
-    user_flairs = ProcessRedditUsers.fetch_user_flairs(Rails.configuration.app_config["subreddit"]) 
+    user_flairs = ProcessRedditUsers.fetch_user_flairs(Rails.configuration.app_config["subreddit"])
 
     users = ProcessRedditUsers.extract_mal_profiles(user_flairs)
     users.each do |reddit_username, mal_profile|
@@ -25,7 +27,9 @@ namespace :update do
   desc "Calculates the score from users for the week"
   task calculate_scores: :environment do
     Anime.all.each do |anime|
-      CalculateRedditScores.calculate_anime_score(anime)
+      calculator = CalculateRedditScores.new(anime)
+      score = calculator.calculate_anime_score
+      puts "Calculated the score for #{anime.title} as #{score}."
     end
 
     CalculateRedditScores.calculate_anime_ranks
@@ -38,5 +42,5 @@ namespace :update do
   end
 
   desc "Run all the tasks for updating the database"
-  task all: [:users, :user_scores, :calculate_scores, :mal_scores]
+  task all: %i[users user_scores calculate_scores mal_scores]
 end

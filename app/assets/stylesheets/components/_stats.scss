@@ -2,7 +2,7 @@
   $stats-color: lighten($action-color, 10%);
 
   padding: $base-spacing / 2;
-
+  @include clearfix;
   ul {
     padding: 0;
   }

@@ -1,0 +1,29 @@
+.anime {
+  @include grid-container;
+
+  .poster {
+    @include grid-column(12);
+
+    @media screen and (min-width: $medium-screen) {
+      @include grid-column(6);
+    }
+
+    text-align: center;
+    //
+    // @media screen and (min-width: $large-screen) {
+    //   @include grid-column(2);
+    // }
+  }
+
+  .stats-container {
+    @include grid-column(12);
+
+    @media screen and (min-width: $medium-screen) {
+      @include grid-column(6);
+    }
+  }
+
+  .user_scores {
+    @include grid-column(12);
+  }
+}

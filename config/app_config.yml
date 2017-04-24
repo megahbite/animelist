@@ -2,7 +2,7 @@ default: &default
   subreddit: "xxanime"
   scoring:
     mean: 6.55 # A mean to weight the scores towards
-    minimum: 2.0 # The minimum number of scores before something can be ranked.
+    minimum: 3.0 # The minimum number of scores before something can be ranked.
 
 development:
   <<: *default

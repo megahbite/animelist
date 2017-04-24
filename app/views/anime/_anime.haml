@@ -1,5 +1,7 @@
 .anime
-  %h2.title= anime.title
+  %h2.title
+    %a{href: "https://myanimelist.net/anime/#{anime.mal_id}"}
+      = anime.title
 
   .poster
     %img{src: anime.image_url, title: anime.title}

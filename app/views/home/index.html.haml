@@ -3,16 +3,16 @@
 .pagination_controls= paginate @front_page
 
 .anime_list.alternating_table
-
+  - new_direction = "desc".eql?(params[:direction].try(:downcase)) ? "asc" : "desc"
   %table
     %tr
-      %th #
+      %th= link_to "#", url_for(sort: "rank", direction: new_direction)
       %th
-      %th Title
-      %th Score
-      %th MAL Rank
-      %th MAL Score
-      %th Difference
+      %th= link_to "Title", url_for(sort: "title", direction: new_direction)
+      %th= link_to "Score", url_for(sort: "rank", direction: new_direction)
+      %th= link_to "MAL Rank", url_for(sort: "mal", direction: new_direction)
+      %th= link_to "MAL Score", url_for(sort: "mal", direction: new_direction)
+      %th= link_to "Difference", url_for(sort: "difference", direction: new_direction)
     - @front_page.each do |anime|
       - cache ["anime-rank", anime] do
         %tr
@@ -27,8 +27,8 @@
           %td= anime.mal_rank
           %td= anime.mal_score
           %td
-            = anime.rank_difference
+            = anime.score_difference
             %br
-            = "(#{anime.score_difference})"
+            = "(#{anime.rank_difference})"
 
 .pagination_controls= paginate @front_page

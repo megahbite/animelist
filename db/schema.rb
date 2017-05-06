@@ -71,8 +71,4 @@ ActiveRecord::Schema.define(version: 20170423051843) do
     t.datetime "updated_at",  null: false
   end
 
-  add_foreign_key "mal_scores", "animes"
-  add_foreign_key "reddit_scores", "animes"
-  add_foreign_key "user_scores", "animes"
-  add_foreign_key "user_scores", "users"
 end

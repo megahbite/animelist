@@ -36,6 +36,9 @@ append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/syst
 # set :keep_releases, 5
 
 set :puma_workers, 2
+set :puma_preload_app, true
+set :puma_init_active_record, true
 set :puma_env, :production
+set :nginx_use_ssl, true
 
 set :conditionally_migrate, true

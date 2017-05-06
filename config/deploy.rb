@@ -39,6 +39,7 @@ set :puma_workers, 2
 set :puma_preload_app, true
 set :puma_init_active_record, true
 set :puma_env, :production
+set :nginx_server_name, "xxanime.megan.moe"
 set :nginx_use_ssl, true
 
 set :conditionally_migrate, true

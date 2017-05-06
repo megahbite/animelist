@@ -2,15 +2,26 @@
 
 class ProcessRedditUsers
   def self.fetch_user_flairs(subreddit)
-    new_posts_json = Faraday.get "https://www.reddit.com/r/#{subreddit}/new.json?limit=100"
+    after = ""
+    users = {}
+    3.times do
+      after = process_subreddit_page(subreddit, after, users)
+    end
+
+    users
+  end
+
+  def self.process_subreddit_page(subreddit, after, users)
+    new_posts_json = Faraday.get "https://www.reddit.com/r/#{subreddit}/new.json?limit=100&after=#{after}"
+
     new_posts = JSON.parse new_posts_json.body
     post_ids = new_posts["data"]["children"].map { |child| child["data"]["id"] }
-    users = {}
+    
     post_ids.each do |post_id|
       comment_authors(subreddit, post_id, users)
     end
 
-    users
+    new_posts["data"]["after"]
   end
 
   def self.extract_mal_profiles(user_flairs)

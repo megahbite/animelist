@@ -1,8 +1,9 @@
 .stats
   %ul
     %li
-      = front_page.number_of_users
-      %span Reddit users tracked
+      = link_to users_path do
+        = front_page.number_of_users
+        %span Reddit users tracked
     %li
       = front_page.reddit_average
       %span

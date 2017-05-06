@@ -1,6 +1,12 @@
 = render partial: "stats", locals: { front_page: @front_page }
 
-.pagination_controls= paginate @front_page
+.front_page_controls
+  .search
+    = form_tag "/search", method: :get, class: "search-bar" do
+      = search_field_tag "q", nil, placeholder: "Search anime or user"
+      = submit_tag "Search"
+  .pagination_container
+    .pagination_controls= paginate @front_page
 
 .anime_list.alternating_table
   - new_direction = "desc".eql?(params[:direction].try(:downcase)) ? "asc" : "desc"

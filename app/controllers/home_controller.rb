@@ -5,6 +5,14 @@ class HomeController < ApplicationController
     @front_page = FrontPageAnimesDecorator.decorate(anime)
   end
 
+  def search
+    search_param = params[:q]
+
+    @users = User.where("reddit_name ILIKE :q OR mal_name ILIKE :q", q: "%#{search_param}%").order(:reddit_name)
+
+    @anime = Anime.where("title ILIKE :q OR synonyms ILIKE :q", q: "%#{search_param}%").order(:title)
+  end
+
   private
 
   def anime

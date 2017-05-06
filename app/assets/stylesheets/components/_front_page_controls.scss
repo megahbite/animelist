@@ -1,0 +1,16 @@
+.front_page_controls {
+  @include grid-container;
+
+  .pagination_container {
+    @include grid-column(12);
+  }
+
+  .search {
+    @include grid-column(12);
+
+    @media screen and (min-width: $large-screen) {
+      @include grid-column(6);
+      @include grid-shift(6);
+    }
+  }
+}

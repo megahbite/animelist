@@ -1,0 +1,21 @@
+.search
+  = form_tag "/search", method: :get, class: "search-bar" do
+    = search_field_tag "q", params[:q], placeholder: "Search anime or user"
+    = submit_tag "Search"
+
+%h2 Users
+
+.alternating_table
+  %table
+    %tr
+      %th Reddit profile
+      %th MAL profile
+      %th Added
+    = render partial: "users/user", collection: @users
+
+%h2 Anime
+- @anime.each do |anime|
+  %p= link_to anime.title, anime
+
+-# .alternating_table
+-#   %table

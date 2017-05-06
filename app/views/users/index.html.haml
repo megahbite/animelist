@@ -1,0 +1,11 @@
+.pagination_controls= paginate @users
+
+.alternating_table
+  %table
+    %tr
+      %th Reddit profile
+      %th MAL profile
+      %th Added
+    = render partial: "user", collection: @users
+
+.pagination_controls= paginate @users

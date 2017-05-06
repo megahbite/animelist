@@ -10,6 +10,9 @@ set :repo_url, "https://github.com/megahbite/animelist.git"
 # Default deploy_to directory is /var/www/my_app_name
 set :deploy_to, "/srv/animelist-rails"
 
+set :rbenv_type, :user
+set :rbenv_ruby, "2.4.1"
+
 # Default value for :format is :airbrussh.
 # set :format, :airbrussh
 

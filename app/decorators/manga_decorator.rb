@@ -1,7 +1,11 @@
 # frozen_string_literal: true
 
-class AnimeDecorator < Draper::Decorator
-  delegate :title, :image_url, :to_param, :mal_id, :cache_key, :synonyms, :episode_count
+class MangaDecorator < Draper::Decorator
+  delegate :title, :image_url, :to_param, :mal_id, :cache_key, :synonyms, :chapter_count
+
+  def self.collection_decorator_class
+    PaginatedDecorator
+  end
 
   def rank
     object.latest_rank
@@ -29,7 +33,7 @@ class AnimeDecorator < Draper::Decorator
     format("%+d", diff)
   end
 
-  def seen_by
+  def read_by
     UserScore.where.not(status: 6).where(scoreable: object).count
   end
 

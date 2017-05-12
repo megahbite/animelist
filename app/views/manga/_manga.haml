@@ -1,0 +1,63 @@
+.anime
+  %h2.title
+    %a{href: "https://myanimelist.net/manga/#{manga.mal_id}"}
+      = manga.title
+  %h3.subtitle
+    = manga.synonyms
+
+  .poster
+    %img{src: manga.image_url, title: manga.title}
+
+  .stats-container
+    .stats
+      %ul
+        %li
+          = manga.rank
+          %span Rank
+        %li
+          = manga.mal_rank
+          %span MAL Rank
+
+    .stats
+      %ul
+        %li
+          = manga.score
+          %span Score
+        %li
+          = manga.mal_score
+          %span MAL Score
+        %li
+          = manga.score_difference
+          %span Difference
+
+    .stats
+      %ul
+        %li
+          = manga.read_by
+          %span Read by
+        %li
+          = manga.number_of_votes
+          %span No. of scores
+        %li
+          = manga.chapter_count
+          %span Total chapters
+
+  .user_scores.alternating_table
+    %table
+      %tr
+        %th Reddit Profile
+        %th MAL Profile
+        %th Score
+        %th Status
+        %th Chapters Read
+      - scores.each do |score|
+        %tr
+          %td
+            %a{href: "https://www.reddit.com/user/#{score.reddit_name}"}
+              = score.reddit_name
+          %td
+            %a{href: "https://mymangalist.net/profile/#{score.mal_name}"}
+              = score.mal_name
+          %td= score.score
+          %td= score.status
+          %td= score.watched

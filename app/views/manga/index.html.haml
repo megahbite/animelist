@@ -1,0 +1,38 @@
+.front_page_controls
+  .search
+    = form_tag "/search", method: :get, class: "search-bar" do
+      = search_field_tag "q", nil, placeholder: "Search anime or user"
+      = submit_tag "Search"
+  .pagination_container
+    .pagination_controls= paginate @manga
+
+.anime_list.alternating_table
+  - new_direction = "desc".eql?(params[:direction].try(:downcase)) ? "asc" : "desc"
+  %table
+    %tr
+      %th= link_to "#", url_for(sort: "rank", direction: new_direction)
+      %th
+      %th= link_to "Title", url_for(sort: "title", direction: new_direction)
+      %th= link_to "Score", url_for(sort: "rank", direction: new_direction)
+      %th= link_to "MAL Rank", url_for(sort: "mal", direction: new_direction)
+      %th= link_to "MAL Score", url_for(sort: "mal", direction: new_direction)
+      %th= link_to "Difference", url_for(sort: "difference", direction: new_direction)
+    - @manga.each do |manga|
+      - cache ["manga-rank", manga] do
+        %tr
+          %td.rank= manga.rank
+          %td
+            = link_to manga_path(manga) do
+              %img.thumbnail{src: manga.image_url, title: manga.title}
+          %td
+            = link_to manga_path(manga) do
+              = manga.title
+          %td= manga.score
+          %td= manga.mal_rank
+          %td= manga.mal_score
+          %td
+            = manga.score_difference
+            %br
+            = "(#{manga.rank_difference})"
+
+.pagination_controls= paginate @manga

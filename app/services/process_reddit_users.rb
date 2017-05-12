@@ -16,7 +16,7 @@ class ProcessRedditUsers
 
     new_posts = JSON.parse new_posts_json.body
     post_ids = new_posts["data"]["children"].map { |child| child["data"]["id"] }
-    
+
     post_ids.each do |post_id|
       comment_authors(subreddit, post_id, users)
     end

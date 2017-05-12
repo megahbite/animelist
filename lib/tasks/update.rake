@@ -14,13 +14,17 @@ namespace :update do
     end
   end
 
-  desc "Pulls the anime scores from the users' MAL profiles"
+  desc "Pulls the anime/manga scores from the users' MAL profiles"
   task user_scores: :environment do
     conn = Faraday.new(url: "https://myanimelist.net")
     User.all.each do |user|
-      anime_scores = ProcessMalProfiles.get_user_scores(conn, user.mal_name)
+      service = ProcessMalProfiles.new(conn, user)
+      anime_scores = service.anime_user_scores
       puts "Adding scores from #{user.reddit_name} for #{anime_scores.count} anime"
-      ProcessMalProfiles.add_or_update_scores(user, anime_scores)
+      service.add_or_update_anime_scores(anime_scores)
+      manga_scores = service.manga_user_scores
+      puts "Adding scores from #{user.reddit_name} for #{manga_scores.count} manga"
+      service.add_or_update_manga_scores(manga_scores)
     end
   end
 
@@ -28,17 +32,25 @@ namespace :update do
   task calculate_scores: :environment do
     Anime.all.each do |anime|
       calculator = CalculateRedditScores.new(anime)
-      score = calculator.calculate_anime_score
+      score = calculator.calculate_score
       puts "Calculated the score for #{anime.title} as #{score}."
     end
 
+    Manga.all.each do |manga|
+      calculator = CalculateRedditScores.new(manga)
+      score = calculator.calculate_score
+      puts "Calculated the score for #{manga.title} as #{score}"
+    end
+
     CalculateRedditScores.calculate_anime_ranks
+    CalculateRedditScores.calculate_manga_ranks
   end
 
   desc "Pulls the community scores from MAL"
   task mal_scores: :environment do
     conn = Faraday.new(url: "https://myanimelist.net")
-    ProcessMalScores.extract_scores(conn)
+    ProcessMalScores.extract_anime_scores(conn)
+    ProcessMalScores.extract_manga_scores(conn)
   end
 
   desc "Run all the tasks for updating the database"

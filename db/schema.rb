@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170423051843) do
+ActiveRecord::Schema.define(version: 20170512113207) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,10 +35,28 @@ ActiveRecord::Schema.define(version: 20170423051843) do
     t.float    "score"
     t.integer  "rank"
     t.integer  "week"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.string   "scoreable_type"
+    t.integer  "scoreable_id"
     t.index ["anime_id", "week"], name: "index_mal_scores_on_anime_id_and_week", using: :btree
     t.index ["anime_id"], name: "index_mal_scores_on_anime_id", using: :btree
+    t.index ["scoreable_type", "scoreable_id"], name: "index_mal_scores_on_scoreable_type_and_scoreable_id", using: :btree
+  end
+
+  create_table "mangas", force: :cascade do |t|
+    t.integer  "mal_id"
+    t.string   "title"
+    t.text     "image_url"
+    t.integer  "chapter_count"
+    t.text     "synonyms"
+    t.integer  "latest_rank"
+    t.float    "latest_score"
+    t.integer  "latest_mal_rank"
+    t.float    "latest_mal_score"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.index ["mal_id"], name: "index_mangas_on_mal_id", using: :btree
   end
 
   create_table "reddit_scores", force: :cascade do |t|
@@ -46,10 +64,13 @@ ActiveRecord::Schema.define(version: 20170423051843) do
     t.float    "score"
     t.integer  "rank"
     t.integer  "week"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.string   "scoreable_type"
+    t.integer  "scoreable_id"
     t.index ["anime_id", "week"], name: "index_reddit_scores_on_anime_id_and_week", using: :btree
     t.index ["anime_id"], name: "index_reddit_scores_on_anime_id", using: :btree
+    t.index ["scoreable_type", "scoreable_id"], name: "index_reddit_scores_on_scoreable_type_and_scoreable_id", using: :btree
   end
 
   create_table "user_scores", force: :cascade do |t|
@@ -58,9 +79,12 @@ ActiveRecord::Schema.define(version: 20170423051843) do
     t.integer  "status"
     t.integer  "watched"
     t.integer  "score"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.string   "scoreable_type"
+    t.integer  "scoreable_id"
     t.index ["anime_id"], name: "index_user_scores_on_anime_id", using: :btree
+    t.index ["scoreable_type", "scoreable_id"], name: "index_user_scores_on_scoreable_type_and_scoreable_id", using: :btree
     t.index ["user_id"], name: "index_user_scores_on_user_id", using: :btree
   end
 
@@ -71,4 +95,8 @@ ActiveRecord::Schema.define(version: 20170423051843) do
     t.datetime "updated_at",  null: false
   end
 
+  add_foreign_key "mal_scores", "animes"
+  add_foreign_key "reddit_scores", "animes"
+  add_foreign_key "user_scores", "animes"
+  add_foreign_key "user_scores", "users"
 end

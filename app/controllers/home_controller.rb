@@ -11,6 +11,8 @@ class HomeController < ApplicationController
     @users = User.where("reddit_name ILIKE :q OR mal_name ILIKE :q", q: "%#{search_param}%").order(:reddit_name)
 
     @anime = Anime.where("title ILIKE :q OR synonyms ILIKE :q", q: "%#{search_param}%").order(:title)
+
+    @manga = Manga.where("title ILIKE :q OR synonyms ILIKE :q", q: "%#{search_param}%").order(:title)
   end
 
   private

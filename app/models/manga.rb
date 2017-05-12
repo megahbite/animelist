@@ -1,6 +1,4 @@
-# frozen_string_literal: true
-
-class Anime < ApplicationRecord
+class Manga < ApplicationRecord
   paginates_per 50
 
   has_many :reddit_scores, as: :scoreable
